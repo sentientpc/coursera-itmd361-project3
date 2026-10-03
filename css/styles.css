@@ -294,6 +294,18 @@ body > footer {
     height: 10vh;
     min-height: 110px;
   }
+
+  .locations-map #map {
+    height: 400px;
+  }
+
+  .location-info-content h3 {
+    font-size: 1.2rem;
+  }
+
+  .location-info-content p {
+    font-size: 0.9rem;
+  }
 }
 
 /* Mobile device up to 360px styles */
@@ -397,5 +409,17 @@ body > footer {
 
   .hero {
     display: none;
+  }
+
+  .locations-map #map {
+    height: 300px;
+  }
+
+  .location-info-content h3 {
+    font-size: 1rem;
+  }
+
+  .location-info-content p {
+    font-size: 0.8rem;
   }
 }
