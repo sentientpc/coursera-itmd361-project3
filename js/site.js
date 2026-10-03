@@ -4,7 +4,7 @@ var concertLocations = [
     name: "Fort Homer Hesterly Armory",
     address: "522 North Howard Avenue, Tampa, FL 33606",
     wgs84: { lat: 27.948964, lng: -82.483905 },
-    date: "1972-04-14",
+    date: "04/14/1972",
     tour: "Dark Side of the Moon Tour (1972)",
     concertHighlights:
       'The band performed early, work-in-progress versions of tracks from The Dark Side of the Moon (some under working titles like "The Travel Sequence" for On the Run and "The Mortality Sequence" for The Great Gig in the Sky).',
@@ -13,7 +13,7 @@ var concertLocations = [
     name: "Tampa Stadium",
     address: "4201 North Dale Mabry Highway, Tampa, FL 33607",
     wgs84: { lat: 27.977097, lng: -82.502586 },
-    date: "1973-06-29",
+    date: "06/29/1973",
     tour: "Dark Side of the Moon Tour (1973)",
     concertHighlights:
       "The concert included a sequential performance of the entire The Dark Side of the Moon album, complete with immersive quadraphonic sound and a model airplane crashing into the stage.",
@@ -22,7 +22,7 @@ var concertLocations = [
     name: "Tampa Stadium",
     address: "4201 North Dale Mabry Highway, Tampa, FL 33607",
     wgs84: { lat: 27.977097, lng: -82.502586 },
-    date: "1977-04-24",
+    date: "04/24/1977",
     tour: "In the Flesh Tour (1977)",
     concertHighlights:
       "Pink Floyd played both their Animals and Wish You Were Here albums in their entirety, highlighted by a giant inflatable pig and other farm animals roaming the sky above the crowd against a famously cosmic pink sunset.",
@@ -31,7 +31,7 @@ var concertLocations = [
     name: "Tampa Stadium",
     address: "4201 North Dale Mabry Highway, Tampa, FL 33607",
     wgs84: { lat: 27.977097, lng: -82.502586 },
-    date: "1987-10-30",
+    date: "10/30/1987",
     tour: "A Momentary Lapse of Reason (1987)",
     concertHighlights:
       'Ten years after their previous visit, Pink Floyd delivered an epic, laser-filled set of new material and classic hits, peaking with an unforgettable moment when their legendary inflatable flying pig dramatically exploded over the roaring crowd during "One of These Days".',
@@ -40,7 +40,7 @@ var concertLocations = [
     name: "Tampa Stadium",
     address: "4201 North Dale Mabry Highway, Tampa, FL 33607",
     wgs84: { lat: 27.977097, lng: -82.502586 },
-    date: "1994-05-06",
+    date: "05/06/1994",
     tour: "The Division Bell (1994)",
     concertHighlights:
       'Pink Floyd delivered a sensory masterpiece of immense quadraphonic sound and pulsing lasers, culminating in David Gilmour\'s transcendent, show-stopping guitar solo during "Comfortably Numb".',
@@ -195,12 +195,21 @@ function fitLocationBounds(map) {
   map.fitBounds(bounds, 48);
 }
 
-// Load the locations info into the last paragraph of the locations-info section.
-function loadLocationsInfo(locationsInfoPs) {
-  var locationsInfoLastP = locationsInfoPs[locationsInfoPs.length - 1];
-  if (locationsInfoLastP) {
-    locationsInfoLastP.textContent = `Pink Floyd performed ${concertLocations.length} concerts in the Tampa Bay area.`;
-  }
+// Load the concert info section.
+function loadConcertInfo(concertInfo) {
+  if (!concertInfo) return;
+
+  var paragraph = document.createElement("p");
+  paragraph.textContent = `Pink Floyd performed ${concertLocations.length} concerts in the Tampa Bay area.`;
+
+  var concertList = document.createElement("ul");
+  concertLocations.forEach(function (location) {
+    var listItem = document.createElement("li");
+    listItem.textContent = `${location.tour} at ${location.name} on ${location.date}.`;
+    concertList.append(listItem);
+  });
+
+  concertInfo.replaceChildren(paragraph, concertList);
 }
 
 // Load the Google Map with concert locations.
@@ -220,10 +229,10 @@ function loadGoogleMap() {
 
 // Load the locations map and info when the page is loaded.
 function locationsLoad() {
-  var locationsInfoPs = document.querySelectorAll(".locations-info p");
-  if (locationsInfoPs.length === 0) return; // Not in the locations page.
+  var concertInfo = document.querySelector("#concert-info");
+  if (!concertInfo) return; // Not in the locations page.
 
-  loadLocationsInfo(locationsInfoPs);
+  loadConcertInfo(concertInfo);
   loadGoogleMap();
 }
 

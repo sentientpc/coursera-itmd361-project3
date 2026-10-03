@@ -230,6 +230,10 @@ header > h1 {
   margin-top: 0;
 }
 
+#concert-info li {
+  line-height: 1.65;
+}
+
 /* Locations map styles */
 .locations-map {
   margin-inline: auto;
