@@ -215,6 +215,21 @@ header > h1 {
   accent-color: #79aebe;
 }
 
+/* Locations info styles */
+.locations-info {
+  margin-inline: auto;
+  width: 70vw;
+  max-width: 60rem;
+  box-sizing: border-box;
+  border-left: 4px solid #79aebe;
+}
+
+.locations-info h2 {
+  color: #79aebe;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
 /* Footer styles */
 body > footer {
   background-color: #1b2a3e;
