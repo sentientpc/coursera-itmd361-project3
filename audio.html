@@ -4,24 +4,41 @@
   <meta charset="utf-8">
   <!-- Disabled for PII and privacy concerns -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ITMD361 - Project 3 - Audio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
   <header>
     <nav id="main-nav">
-      <ul>
+      <ul class="desktop-nav">
         <li><a href="index.html">Home</a></li>
         <li><a href="resume.html">Resume</a></li>
         <li class="active"><a href="audio.html">Audio</a></li>
       </ul>
+      <details class="mobile-nav">
+        <summary aria-label="Toggle navigation menu">
+          <span class="menu-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </summary>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="resume.html">Resume</a></li>
+          <li class="active"><a href="audio.html">Audio</a></li>
+        </ul>
+      </details>
     </nav>
+    <h1>AI Audio Creations</h1>
   </header>
   <section class="hero">
+    <div class="hero-title" role="heading" aria-level="1">AI Audio Creations</div>
     <img src="images/audio-hero.png" alt="Audio Hero Image">
   </section>
-  <h1>AI Audio Creations</h1>
   <section class="audio-info">
     <h2>General Information</h2>
     <p>This page contains audio files that were created using <a href="https://suno.com" target="_blank" rel="noopener noreferrer">https://suno.com</a> AI.</p>

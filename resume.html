@@ -4,24 +4,41 @@
   <meta charset="utf-8">
   <!-- Disabled for PII and privacy concerns -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ITMD361 - Project 3 - Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
   <header>
     <nav id="main-nav">
-      <ul>
+      <ul class="desktop-nav">
         <li><a href="index.html">Home</a></li>
         <li class="active"><a href="resume.html">Resume</a></li>
         <li><a href="audio.html">Audio</a></li>
       </ul>
+      <details class="mobile-nav">
+        <summary aria-label="Toggle navigation menu">
+          <span class="menu-icon" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </summary>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li class="active"><a href="resume.html">Resume</a></li>
+          <li><a href="audio.html">Audio</a></li>
+        </ul>
+      </details>
     </nav>
+    <h1>Matthew Krzan's Resume</h1>
   </header>
   <section class="hero">
+    <div class="hero-title" role="heading" aria-level="1">Matthew Krzan's Resume</div>
     <img src="images/resume-hero.png" alt="Resume Hero Image">
   </section>
-  <h1>Matthew Krzan's Resume</h1>
   <main class="resume-content">
     <section>
       <h2>Contact Information</h2>
