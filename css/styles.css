@@ -1,0 +1,207 @@
+/* Set the basic body styles for dark theme */
+body {
+  background-color: #1b2a3e;
+  color: #ffffff;
+  font-family: "Noto Sans", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Content link styles */
+a {
+  color: #79aebe;
+  font-weight: 700;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 0.2em;
+}
+
+a:hover {
+  color: #b8e4ec;
+}
+
+a:focus-visible {
+  outline: 3px solid #b8e4ec;
+  outline-offset: 4px;
+}
+
+/* Styles for all sections and footer except for the hero section */
+body > section:not(.hero),
+body > footer {
+  position: relative;
+  z-index: 1;
+  background-color: #000000;
+  padding: 1.5rem;
+}
+
+/* Sticky header styles */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Main navigation styles */
+#main-nav {
+  display: flex;
+  justify-content: center;
+  background-color: #1b2a3e;
+}
+
+#main-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#main-nav ul li {
+  float: left;
+}
+
+#main-nav ul li a {
+  padding: 10px 25px;
+  display: block;
+  text-decoration: none;
+  color: #ccc;
+}
+
+#main-nav ul li a:hover {
+  text-decoration: underline;
+}
+
+#main-nav ul li.active a {
+  background-color: #79aebe;
+  color: #333;
+}
+
+/* Primary heading style to float over the hero section */
+body > h1 {
+  position: absolute;
+  top: calc(20vh - 38px);
+  left: 1.5rem;
+  right: 1.5rem;
+  z-index: 1;
+  margin: 0;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+/* Hero section styles */
+.hero {
+  position: sticky;
+  top: 0;
+  height: 70vh;
+  min-height: 360px;
+  overflow: hidden;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+  background-color: #111;
+}
+
+.hero {
+  height: 20vh;
+}
+
+.hero img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+}
+
+/* Styles for the home-info section */
+.home-info {
+  margin: 0 auto;
+  border-left: 4px solid #79aebe;
+  box-shadow: 0 10px 24px #00000059;
+}
+
+.home-info h2 {
+  margin-top: 0;
+  color: #b8e4ec;
+}
+
+.home-info p {
+  line-height: 1.7;
+}
+
+.home-info p:first-of-type {
+  margin-top: 0;
+}
+
+/* Styles for the resume-content sections */
+.resume-content {
+  position: relative;
+  z-index: 1;
+  background-color: #1b2a3e;
+}
+
+.resume-content > section {
+  margin: 1rem 0 0;
+  box-sizing: border-box;
+  border-left: 4px solid #79aebe;
+  padding: 1.5rem;
+  padding-bottom: 0.5rem;
+  background-color: #000000;
+}
+
+.resume-content > section h2 {
+  margin: 0 0 1.25rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #38566a;
+  color: #b8e4ec;
+  font-size: 1.5rem;
+  letter-spacing: 0.03em;
+}
+
+.resume-content > section h3 {
+  color: #ffffff;
+  font-size: 1.1rem;
+}
+
+.resume-content > section p,
+.resume-content > section li {
+  line-height: 1.65;
+}
+
+.resume-content > section ul {
+  padding-left: 1.25rem;
+}
+
+/* Audio info styles */
+.audio-info {
+  border-left: 4px solid #79aebe;
+}
+
+.audio-info h2 {
+  color: #79aebe;
+  font-size: 1.5rem;
+  margin-top: 0;
+}
+
+/* Audio track styles */
+.audio-track {
+  border-top: 1px solid #79aebe;
+  padding-top: 1rem;
+  border-left: 4px solid #79aebe;
+}
+
+.audio-track h3 {
+  color: #79aebe;
+  margin-top: 0;
+}
+
+.audio-track audio {
+  display: block;
+  width: min(100%, 42rem);
+  accent-color: #79aebe;
+}
+
+/* Footer styles */
+body > footer {
+  background-color: #1b2a3e;
+  margin-top: auto;
+}
