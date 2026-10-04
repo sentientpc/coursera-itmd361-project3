@@ -60,6 +60,7 @@ function addLocationMarkers(map) {
   var expansionZoom = 15;
   var pointSpacingMeters = 100 * 0.9144;
   var groupedMarkers = [];
+  var singleLocationMarkers = [];
 
   map.addListener("click", function () {
     infoWindow.close();
@@ -111,6 +112,10 @@ function addLocationMarkers(map) {
     });
 
     if (group.length === 1) {
+      singleLocationMarkers.push({
+        location: group[0],
+        marker: groupMarker,
+      });
       groupMarker.addEventListener("gmp-click", function () {
         showLocationInfo(group[0], groupMarker);
       });
@@ -185,6 +190,33 @@ function addLocationMarkers(map) {
 
   map.addListener("zoom_changed", updateGroupsForZoom);
   updateGroupsForZoom();
+
+  function focusLocation(location) {
+    var groupState = groupedMarkers.find(function (state) {
+      return state.group.indexOf(location) !== -1;
+    });
+    var marker;
+
+    if (groupState) {
+      var locationIndex = groupState.group.indexOf(location);
+      if (!groupState.expanded) expandGroup(groupState);
+      marker = groupState.expandedMarkers[locationIndex];
+    } else {
+      var markerState = singleLocationMarkers.find(function (state) {
+        return state.location === location;
+      });
+      marker = markerState.marker;
+    }
+
+    map.setOptions({
+      center: location.wgs84,
+      zoom: Math.max(map.getZoom(), expansionZoom),
+    });
+    map.panBy(0, -Math.round(map.getDiv().clientHeight * 0.35));
+    showLocationInfo(location, marker);
+  }
+
+  return focusLocation;
 }
 
 function fitLocationBounds(map) {
@@ -196,7 +228,7 @@ function fitLocationBounds(map) {
 }
 
 // Load the concert info section.
-function loadConcertInfo(concertInfo) {
+function loadConcertInfo(concertInfo, focusLocation) {
   if (!concertInfo) return;
 
   var paragraph = document.createElement("p");
@@ -205,7 +237,18 @@ function loadConcertInfo(concertInfo) {
   var concertList = document.createElement("ul");
   concertLocations.forEach(function (location) {
     var listItem = document.createElement("li");
-    listItem.textContent = `${location.tour} at ${location.name} on ${location.date}.`;
+    var link = document.createElement("a");
+    link.href = "#map";
+    link.textContent = `${location.tour} at ${location.name} on ${location.date}.`;
+    link.addEventListener("click", function (event) {
+      event.preventDefault();
+      focusLocation(location);
+      document.querySelector(".locations-map #map").scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    });
+    listItem.append(link);
     concertList.append(listItem);
   });
 
@@ -213,7 +256,12 @@ function loadConcertInfo(concertInfo) {
 }
 
 // Load the Google Map with concert locations.
-function loadGoogleMap() {
+async function loadGoogleMap() {
+  await Promise.all([
+    google.maps.importLibrary("maps"),
+    google.maps.importLibrary("marker"),
+  ]);
+
   var mapElement = document.querySelector(".locations-map #map");
   if (mapElement) {
     var map = new google.maps.Map(mapElement, {
@@ -222,18 +270,19 @@ function loadGoogleMap() {
       mapId: "concert-map",
     });
 
-    addLocationMarkers(map);
+    var focusLocation = addLocationMarkers(map);
     fitLocationBounds(map);
+    return focusLocation;
   }
 }
 
 // Load the locations map and info when the page is loaded.
-function locationsLoad() {
+async function locationsLoad() {
   var concertInfo = document.querySelector("#concert-info");
   if (!concertInfo) return; // Not in the locations page.
 
-  loadConcertInfo(concertInfo);
-  loadGoogleMap();
+  var focusLocation = await loadGoogleMap();
+  loadConcertInfo(concertInfo, focusLocation);
 }
 
 // Main page load event listener.

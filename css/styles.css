@@ -234,6 +234,16 @@ header > h1 {
   line-height: 1.65;
 }
 
+#concert-info li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+#concert-info li a:hover {
+  text-decoration: underline;
+}
+
 /* Locations map styles */
 .locations-map {
   margin-inline: auto;
