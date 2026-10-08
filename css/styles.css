@@ -397,6 +397,54 @@ body > footer {
     font-size: 0.9rem;
   }
 
+  #photos-carousel {
+    margin-top: 1rem;
+  }
+
+  .carousel-controls {
+    grid-template-columns: 2.75rem minmax(0, 1fr) 2.75rem;
+    gap: 0.4rem;
+  }
+
+  .carousel-viewport {
+    aspect-ratio: 4 / 3;
+    max-height: 65vh;
+  }
+
+  .carousel-arrow {
+    width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.4rem;
+    font-size: 0;
+  }
+
+  .carousel-arrow::before {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .carousel-arrow:first-child::before {
+    content: "\2039";
+  }
+
+  .carousel-arrow:last-child::before {
+    content: "\203a";
+  }
+
+  .photo-container {
+    padding: 0.75rem;
+  }
+
+  .photo-container p {
+    padding-top: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .carousel-dots {
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+
   .hero-title {
     top: calc(10vh - 75px);
     font-size: 1.5rem;
@@ -435,6 +483,32 @@ body > footer {
 @media screen and (max-width: 360px) {
   body {
     font-size: 0.8rem;
+  }
+
+  .carousel-controls {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+      "viewport viewport"
+      "previous next";
+    gap: 0.5rem;
+  }
+
+  .carousel-viewport {
+    grid-area: viewport;
+    aspect-ratio: 1 / 1;
+    max-height: 60vh;
+  }
+
+  .carousel-arrow:first-child {
+    grid-area: previous;
+  }
+
+  .carousel-arrow:last-child {
+    grid-area: next;
+  }
+
+  .carousel-arrow {
+    width: 100%;
   }
 
   header {
