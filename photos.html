@@ -5,7 +5,7 @@
   <!-- Disabled for PII and privacy concerns -->
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ITMD361 - Project 3 - Home</title>
+  <title>ITMD361 - Project 3 - Concert Photos</title>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/normalize.css">
   <link rel="stylesheet" type="text/css" href="css/styles.css">
@@ -15,11 +15,11 @@
   <header>
     <nav id="main-nav">
       <ul class="desktop-nav">
-        <li class="active"><a href="index.html">Home</a></li>
+        <li><a href="index.html">Home</a></li>
         <li><a href="resume.html">Resume</a></li>
         <li><a href="audio.html">Audio</a></li>
         <li><a href="locations.html">Locations</a></li>
-        <li><a href="photos.html">Photos</a></li>
+        <li class="active"><a href="photos.html">Photos</a></li>
       </ul>
       <details class="mobile-nav">
         <summary aria-label="Toggle navigation menu">
@@ -30,31 +30,29 @@
           </span>
         </summary>
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
+          <li><a href="index.html">Home</a></li>
           <li><a href="resume.html">Resume</a></li>
           <li><a href="audio.html">Audio</a></li>
           <li><a href="locations.html">Locations</a></li>
-          <li><a href="photos.html">Photos</a></li>
+          <li class="active"><a href="photos.html">Photos</a></li>
         </ul>
       </details>
     </nav>
-    <h1>Welcome to my example site for ITMD361 - Project 3</h1>
+    <h1>Concert Photos</h1>
   </header>
   <section class="hero">
-    <div class="hero-title" role="heading" aria-level="1">Welcome to my example site for ITMD361 - Project 3</div>
-    <img src="images/home-hero.png" alt="Home Hero Image">
+    <div class="hero-title" role="heading" aria-level="1">Concert Photos</div>
+    <img src="images/photos-hero.png" alt="Photos Hero Image">
   </section>
-  <section class="home-info">
+  <section class="photos-info">
     <h2>General Information</h2>
-    <p>For Project 3 this site will build upon the HTML structure from Project 2, adding mobile responsiveness, javascript, and Google Maps integration.</p>
-    <p>The top of the page includes navigation links to other pages in the site.</p>
-    <p>There are two other pages in this site: a resume page and an audio page.</p>
-    <p>Click on the links above to navigate to the other pages.</p>
-    <p>Below the navigation links is a hero image that is included in the project.</p>
-    <p>Below the hero image is a section with general information about the site.</p>
-    <p>Below the general information section is a footer with copyright and contact information.</p>
-    <p>The other pages will follow the same general structure.</p>
-    <p>All of the content on this site is for demonstration purposes only and does not represent any real person or entity.</p>
+    <p>This page contains photos for Pink Floyd concerts in the Tampa Bay area.</p>
+    <div id="photos-list"></div>
+  </section>
+  <section class="photos-slider">
+    <h3>Concert Photos</h3>
+    <p>Explore the gallery of photos from Pink Floyd concerts in the Tampa Bay area.</p>
+    <div id="photos-carousel"></div>
   </section>
   <footer>
     <p>Created by Matthew Krzan</p>

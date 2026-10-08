@@ -8,6 +8,13 @@ var concertLocations = [
     tour: "Dark Side of the Moon Tour (1972)",
     concertHighlights:
       'The band performed early, work-in-progress versions of tracks from The Dark Side of the Moon (some under working titles like "The Travel Sequence" for On the Run and "The Mortality Sequence" for The Great Gig in the Sky).',
+    photos: [
+      {
+        src: "images/19720414.jpg",
+        caption:
+          "Poster for Pink Floyd at Fort Homer Hesterly Armory, Tampa, FL, 04/14/1972",
+      },
+    ],
   },
   {
     name: "Tampa Stadium",
@@ -17,6 +24,17 @@ var concertLocations = [
     tour: "Dark Side of the Moon Tour (1973)",
     concertHighlights:
       "The concert included a sequential performance of the entire The Dark Side of the Moon album, complete with immersive quadraphonic sound and a model airplane crashing into the stage.",
+    photos: [
+      {
+        src: "images/19730629.jpg",
+        caption: "Stage for Pink Floyd at Tampa Stadium, Tampa, FL, 06/29/1973",
+      },
+      {
+        src: "images/19730629_ticket.jpg",
+        caption:
+          "Ticket for Pink Floyd at Tampa Stadium, Tampa, FL, 06/29/1973",
+      },
+    ],
   },
   {
     name: "Tampa Stadium",
@@ -26,6 +44,12 @@ var concertLocations = [
     tour: "In the Flesh Tour (1977)",
     concertHighlights:
       "Pink Floyd played both their Animals and Wish You Were Here albums in their entirety, highlighted by a giant inflatable pig and other farm animals roaming the sky above the crowd against a famously cosmic pink sunset.",
+    photos: [
+      {
+        src: "images/19770424.jpg",
+        caption: "Stage for Pink Floyd at Tampa Stadium, Tampa, FL, 04/24/1977",
+      },
+    ],
   },
   {
     name: "Tampa Stadium",
@@ -35,6 +59,17 @@ var concertLocations = [
     tour: "A Momentary Lapse of Reason (1987)",
     concertHighlights:
       'Ten years after their previous visit, Pink Floyd delivered an epic, laser-filled set of new material and classic hits, peaking with an unforgettable moment when their legendary inflatable flying pig dramatically exploded over the roaring crowd during "One of These Days".',
+    photos: [
+      {
+        src: "images/19871030.jpg",
+        caption: "Stage for Pink Floyd at Tampa Stadium, Tampa, FL, 10/30/1987",
+      },
+      {
+        src: "images/19871030_ticket.jpg",
+        caption:
+          "Ticket for Pink Floyd at Tampa Stadium, Tampa, FL, 10/30/1987",
+      },
+    ],
   },
   {
     name: "Tampa Stadium",
@@ -44,6 +79,21 @@ var concertLocations = [
     tour: "The Division Bell (1994)",
     concertHighlights:
       'Pink Floyd delivered a sensory masterpiece of immense quadraphonic sound and pulsing lasers, culminating in David Gilmour\'s transcendent, show-stopping guitar solo during "Comfortably Numb".',
+    photos: [
+      {
+        src: "images/19940506.jpg",
+        caption: "Stage for Pink Floyd at Tampa Stadium, Tampa, FL, 05/06/1994",
+      },
+      {
+        src: "images/19940506_ticket.jpg",
+        caption:
+          "Ticket for Pink Floyd at Tampa Stadium, Tampa, FL, 05/06/1994",
+      },
+      {
+        src: "images/19940506_shirt.jpg",
+        caption: "Concert Shirt for Pink Floyd The Division Bell Tour",
+      },
+    ],
   },
 ];
 
@@ -285,5 +335,122 @@ async function locationsLoad() {
   loadConcertInfo(concertInfo, focusLocation);
 }
 
+// Load the concert photos carousel.
+function photosLoad() {
+  var carouselElement = document.querySelector("#photos-carousel");
+  if (!carouselElement) return; // Not in the photos page.
+
+  var viewport = document.createElement("div");
+  viewport.className = "carousel-viewport";
+  viewport.setAttribute("role", "group");
+  viewport.setAttribute("aria-roledescription", "carousel");
+  viewport.setAttribute("aria-label", "Concert photos");
+
+  var track = document.createElement("div");
+  track.className = "carousel-track";
+
+  concertLocations.forEach(function (location) {
+    location.photos.forEach(function (photo) {
+      var photoContainer = document.createElement("div");
+      photoContainer.className = "photo-container";
+
+      var img = document.createElement("img");
+      img.src = photo.src;
+      img.alt = photo.caption;
+
+      var photoLink = document.createElement("a");
+      photoLink.href = photo.src;
+      photoLink.target = "_blank";
+      photoLink.rel = "noopener";
+      photoLink.setAttribute(
+        "aria-label",
+        "Open full-size photo in a new tab: " + photo.caption,
+      );
+      photoLink.appendChild(img);
+
+      var caption = document.createElement("p");
+      caption.textContent = photo.caption;
+
+      photoContainer.append(photoLink, caption);
+      track.appendChild(photoContainer);
+    });
+  });
+
+  var slides = Array.from(track.children);
+  if (!slides.length) return;
+
+  var controls = document.createElement("div");
+  controls.className = "carousel-controls";
+
+  var previousButton = document.createElement("button");
+  previousButton.className = "carousel-arrow";
+  previousButton.type = "button";
+  previousButton.textContent = "Previous";
+  previousButton.setAttribute("aria-label", "Previous photo");
+
+  var nextButton = document.createElement("button");
+  nextButton.className = "carousel-arrow";
+  nextButton.type = "button";
+  nextButton.textContent = "Next";
+  nextButton.setAttribute("aria-label", "Next photo");
+
+  var dots = document.createElement("div");
+  dots.className = "carousel-dots";
+  dots.setAttribute("role", "group");
+  dots.setAttribute("aria-label", "Choose a photo");
+
+  slides.forEach(function (slide, index) {
+    slide.setAttribute("role", "group");
+    slide.setAttribute("aria-roledescription", "slide");
+    slide.setAttribute("aria-label", index + 1 + " of " + slides.length);
+
+    var dot = document.createElement("button");
+    dot.className = "carousel-dot";
+    dot.type = "button";
+    dot.setAttribute("aria-label", "Go to photo " + (index + 1));
+    dot.addEventListener("click", function () {
+      showSlide(index);
+    });
+    dots.appendChild(dot);
+  });
+
+  viewport.appendChild(track);
+  controls.append(previousButton, viewport, nextButton);
+  carouselElement.append(controls, dots);
+
+  var currentIndex = 0;
+  var dotButtons = Array.from(dots.children);
+
+  function showSlide(index) {
+    currentIndex = (index + slides.length) % slides.length;
+    track.style.transform = "translateX(-" + currentIndex * 100 + "%)";
+
+    slides.forEach(function (slide, slideIndex) {
+      slide.setAttribute("aria-hidden", slideIndex !== currentIndex);
+    });
+
+    dotButtons.forEach(function (dot, dotIndex) {
+      var isCurrent = dotIndex === currentIndex;
+      dot.classList.toggle("active", isCurrent);
+      if (isCurrent) {
+        dot.setAttribute("aria-current", "true");
+      } else {
+        dot.removeAttribute("aria-current");
+      }
+    });
+  }
+
+  previousButton.addEventListener("click", function () {
+    showSlide(currentIndex - 1);
+  });
+  nextButton.addEventListener("click", function () {
+    showSlide(currentIndex + 1);
+  });
+  showSlide(currentIndex);
+}
+
 // Main page load event listener.
-window.addEventListener("load", locationsLoad);
+window.addEventListener("load", function () {
+  locationsLoad();
+  photosLoad();
+});
